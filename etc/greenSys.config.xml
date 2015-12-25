@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<rdatabase>
+		<dbhost>CENTER-00\SQLEXPRESS</dbhost>
+		<dbuser>sa</dbuser>
+		<dbpass>Qwerty2015</dbpass>
+		<dbname>dbH1_00</dbname>
+	</rdatabase>
+	<remotedatabase>
+		<dbhost>MM02\SQLEXPRESS</dbhost>
+		<dbuser>sa</dbuser>
+		<dbpass>Mega2013</dbpass>
+		<dbname>dbH1_02</dbname>
+	</remotedatabase>
+	<database>
+		<dbhost>MYCOMPUTER-PC\SQLEXPRESS</dbhost>
+		<dbuser>sa</dbuser>
+		<dbpass>masterkey</dbpass>
+		<dbname>dbH1_DEMO</dbname>
+	</database>
+	<locationmapping>
+		<center>dbH1_01</center>
+		<labuan>dbH1_02</labuan>
+		<pnb>dbH1_03</pnb>
+		<demo>dbH1_DEMO</demo>
+	</locationmapping>
+</config>

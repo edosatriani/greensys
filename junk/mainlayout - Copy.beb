@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>greenSys</title>
+
+    <!-- Bootstrap -->
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/css/selectize.default.css" rel="stylesheet">
+	<link href="assets/css/selectize.bootstrap2.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<style>
+		.panel.with-nav-tabs .panel-heading {
+			padding: 5px 5px 0 5px;
+		}
+		.nav-tabs {
+			border-bottom: none;
+		}
+	</style>
+  </head>
+  <body>
+	<div class="panel with-nav-tabs panel-{@themes@}">
+    <div class="panel-heading">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab1success" data-toggle="tab">Entry SPK</a></li>
+            <li><a href="#tab2success" data-toggle="tab">Inqury SPK</a></li>
+            <!--<li><a href="#tab3success" data-toggle="tab">Entry PO</a></li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown">Distribusi Unit <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#tab4success" data-toggle="tab">PDI Order</a></li>
+                    <li><a href="#tab5success" data-toggle="tab">Cetak DO</a></li>
+                    <li><a href="#tab6success" data-toggle="tab">Delivery List</a></li>
+                    <li><a href="#tab6success" data-toggle="tab">Posting Unit</a></li>
+                </ul>
+            </li>-->
+        </ul>
+    </div>
+                    
+    <div class="panel-body">
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="tab1success">{@entry-spk-content@}</div>
+            <div class="tab-pane fade" id="tab2success">
+                <div class="form-group">
+                    <label>Filter Criteria</label>
+                    <select class="form-control" name="FILTERCRITERIA" dataType="string">
+                       {@inqury-spk-filterfield@}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Filter By</label>
+                    <div class="form-group input-group">
+                        <input class="form-control" dataType="string" id="filterby" name="filterby">
+                        <span class="input-group-btn" style="top: -1px;">
+                            <button type="button" class="btn btn-default glyphicon glyphicon-search" id="inquryspk" ></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="inquiry-result" data-example-id="hoverable-table" style="display: none;">
+                    <!--filter result will be placed in here-->  
+                </div>
+                <div class="bs-result-detail" data-example-id="hoverable-table" style="display: none;">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th colspan="2">Title</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody id="inqury-result-detail">
+                        <tr>
+                          <th scope="row">NO. SPK</th>
+                          <td>:</td>
+                          <td>123456</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">STATUS SPK</th>
+                          <td>:</td>
+                          <td>APP. CASHIER</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">TGL. SPK</th>
+                          <td>:</td>
+                          <td>24 April 2015</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+            <div class="tab-pane fade" id="tab3success">
+                
+            </div>
+            <div class="tab-pane fade" id="tab4success">Success 4</div>
+            <div class="tab-pane fade" id="tab5success">Success 5</div>
+        </div>
+    </div>
+	
+  <!-- </div>-->
+	
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="assets/jquery/jquery-1.11.3.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/datepicker/js/bootstrap-datepicker.js"></script>
+	<script src="assets/js/selectize.js"></script>
+	<script src="assets/js/app_greenSys_dataaccess.js"></script>
+    <script>var dataStringSPK ='{@dataspk@}';</script>
+    <script src="assets/js/function-spk.js"></script>
+    
+  </body>
+</html>

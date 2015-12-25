@@ -1,0 +1,16 @@
+
+.form-group {
+	width: 100%;
+}
+
+.panel-heading.custom {
+	padding: 10px 15px 27px 15px;
+}
+
+.panel-heading-content.floatleft {
+	float: left;
+}
+
+.panel-heading-content.floatright {
+	float: right;
+}

@@ -1,0 +1,494 @@
+ <div id="page-wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!--<div class="panel panel-{@themes@}">-->
+                                <!--<div class="panel-heading">
+                                    ...
+                                </div>
+                                <div class="panel-body">-->
+                                    <div class="row">
+                                        <form role="form" method="POST" id="mainForm" action="index.php?app=object" onsubmit="return saveSPK('{@mode@}');">
+										<div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>No. SPK</label>
+                                                    <div class="form-group input-group">
+                                                        <input class="form-control" data-mandatory="true" dataType="string" dataKey="1" validation-string="Nomor SPK" id="nospk" name="NO_SPK" value="{@autonumber@}" {@readonlymode@}>
+                                                        <span class="input-group-btn" style="top: -1px;">
+															<button type="button" class="btn btn-default glyphicon glyphicon-search" id="searchspk" ></button>
+														</span>
+                                                    </div>
+                                                    <p class="help-block">Automatic Number</p>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Tgl. SPK</label>
+                                                    <div class="input-append date" id="dp3" data-date="{@today@}" data-date-format="mm/dd/yyyy">
+                                                        <input class="form-control datepicker" size="16" type="text" data-mandatory="true" dataType="date" validation-string="Tanggal SPK" name="TGL_SPK" value="{@today@}">
+                                                        <span class="add-on"><i class="icon-th"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-{@themes@}">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title">Data Pemohon</h3>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="form-group">
+                                                            <label>Jenis Konsumen</label>
+                                                            <select class="form-control" name="JENIS_KONSUMEN" dataType="string" data-case="0">
+                                                                <option value='I. Individual Customer (Reguler)'>I. Individual Customer (Reguler)</option>
+                                                                <option value='J. Individual Customer (Joint Promo)'>J. Individual Customer (Joint Promo)</option>
+                                                                <option value='C. Individual Customer (Kolektif)'>C. Individual Customer (Kolektif)</option>
+                                                                <option value='G. Group Customer'>G. Group Customer</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="disabledSelect">Nama Instansi</label>
+                                                            <input class="form-control" data-mandatory="false" dataType="string" type="text" name="NAMA_INSTANSI" disabled="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Nama Customer</label>
+                                                            <div class="form-group input-group">
+                                                                <input class="form-control" nosave="true" name="NAMA_PEMOHON" readonly>
+                                                                <span class="input-group-btn" style="top: -1px;">
+																	<button type="button" class="btn btn-default glyphicon glyphicon-pencil" id="entrypemohon"></button>
+																</span>
+                                                            </div>
+                                                            <input type="hidden" name="CUSTOMER_BELI" data-mandatory="false" id="CUSTOMER_BELI" dataType="string" data-flag="related-field:KODE_CUSTOMER_0">
+                                                            <!-- Trigger the modal with a button -->
+
+
+                                                            <!-- Modal -->
+                                                            <div id="pemohon" class="modal fade" role="dialog">
+                                                                <div class="modal-dialog">
+
+                                                                    <!-- Modal content-->
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                            <h4 class="modal-title">Customer Database [PEMOHON]</h4>
+                                                                        </div>
+                                                                        <div class="modal-body">
+																			<div id="error_on_beli"class="alert alert-danger" role="alert" style="display: none;">
+																			  <strong>Oh snap!</strong> Change a few things up and try submitting again.
+																			</div>
+                                                                                <div class="form-group">
+                                                                                    <label>Nama Customer</label>
+																					<input type="hidden" class="form-control" id="KODE_CUSTOMER_BELI" name="KODE_CUSTOMER" data-mandatory="false" dataType="string" dataKey="1" data-flag="autonumber:true" relatedTblIndex="0">
+																					<input type="hidden" class="form-control" id="JENIS_CUSTOMER_BELI" name="JENIS_CUSTOMER" data-mandatory="false" dataType="string" value="PERORANGAN" relatedTblIndex="0">
+                                                                                    <input class="form-control" id="NAMA_CUSTOMER_BELI" name="NAMA_CUSTOMER" data-mandatory="true" dataValidation="true" dataType="string" validation-string="Nama Pemohon" relatedTblIndex="0">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label>Alamat</label>
+                                                                                    <textarea class="form-control" rows="1" id="ALAMAT_BELI" name="ALAMAT" data-mandatory="true" dataValidation="true" dataType="string" validation-string="Alamat Pemohon" relatedTblIndex="0"></textarea>
+                                                                                </div>
+                                                                                <!--<div class="form-group">-->
+                                                                                    <label>Kabupaten/Kodya</label>
+                                                                                    <select class="demo-default selectized" id="KODE_WILAYAH_BELI" name="KODE_WILAYAH" data-mandatory="true" placeholder="Select a Kabupaten or Kodya..." dataValidation="true" dataType="string" validation-string="Kota/Kabupaten Pemohon" relatedTblIndex="0">
+                                                                                        {@direct-active-wilayah-0@}
+                                                                                    </select>
+                                                                                <!--</div>-->
+                                                                                <!--<div class="form-group">-->
+                                                                                    <label>Kecamatan</label>
+                                                                                    <select class="demo-default selectized" id="KODE_KECAMATAN_BELI" name="KODE_KECAMATAN" data-mandatory="true" placeholder="Select a Kecamatan..." dataValidation="true" dataType="string" validation-string="Kecamatan Pemohon" relatedTblIndex="0">
+
+                                                                                    </select>
+                                                                                <!--</div>-->
+                                                                                <!--<div class="form-group">-->
+                                                                                    <label>Desa/Kelurahan</label>
+                                                                                    <select class="demo-default selectized" id="KODE_KELURAHAN_BELI" name="KODE_KELURAHAN" data-mandatory="true" placeholder="Select a Desa or Kelurahan..." dataValidation="true" dataType="string" validation-string="Desa/Kelurahan Pemohon" relatedTblIndex="0">
+
+                                                                                    </select>
+                                                                                <!--</div>-->
+                                                                                <div class="form-group">
+                                                                                    <label>Kode Pos</label>
+                                                                                    <input class="form-control" id="KODEPOS_CUSTOMER_BELI" name="KODE_POS" data-mandatory="true" dataValidation="true" dataType="string" validation-string="Kode Pos Pemohon" relatedTblIndex="0">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label>HP</label>
+                                                                                    <input class="form-control" id="HP_CUSTOMER_BELI" name="HP" data-mandatory="true" dataValidation="true" dataType="string" validation-string="Nomor HP Pemohon" relatedTblIndex="0">
+                                                                                </div>
+                                                                                <div class="form-group" style="display: none;">
+                                                                                    <label>Alt. No.</label>
+                                                                                    <input class="form-control"  id="ALT_CUSTOMER_BELI" name="TELP" data-mandatory="false" dataValidation="false" dataType="string" validation-string="Nomor Alternatif Pemohon" relatedTblIndex="0">
+                                                                                </div>
+																				<textarea class="form-control" rows="3" id="ALAMAT_LENGKAP_BELI" name="ALAMAT_LENGKAP" data-mandatory="false" style="display: none;" dataValidation="false" dataType="string" relatedTblIndex="0"></textarea>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-default" onclick="buildCustomerBeli();">Submit</button>
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Alamat</label>
+                                                            <textarea class="form-control" rows="3" name="ALAMAT_PEMOHON" nosave="true" readonly></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="panel panel-{@themes@}">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title">Data STNK</h3>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="form-group">
+                                                            <label>Nama Customer</label>
+                                                            <div class="form-group input-group">
+                                                                <input class="form-control" name="NAMA_STNK" nosave="true" readonly>
+                                                                <span class="input-group-btn" style="top: -1px;">
+																	<button type="button" class="btn btn-default glyphicon glyphicon-pencil" id="entrystnk"></button>
+																</span>
+                                                            </div>
+                                                            <input type="hidden" name="CUSTOMER_STNK" data-mandatory="false" dataType="string" data-flag="related-field:KODE_CUSTOMER_1">
+                                                            <input type="hidden" name="CUSTOMER_KIRIM" data-mandatory="false" dataType="string" data-flag="related-field:KODE_CUSTOMER_2">
+                                                        </div>
+
+                                                        <!-- Modal -->
+                                                        <div id="stnk" class="modal fade" role="dialog">
+                                                            <div class="modal-dialog">
+
+                                                                <!-- Modal content-->
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                        <h4 class="modal-title">Customer Database [STNK]</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                            <div class="form-group">
+                                                                                <label>Nama Customer</label>
+																				<input type="hidden" class="form-control" id="KODE_CUSTOMER_STNK" name="KODE_CUSTOMER" data-mandatory="false" dataType="string" dataKey="1" data-flag="autonumber:true" relatedTblIndex="1">
+                                                                                <input type="hidden" class="form-control" id="JENIS_CUSTOMER_STNK" name="JENIS_CUSTOMER" data-mandatory="false" dataType="string" value="PERORANGAN" relatedTblIndex="1">
+																				<input class="form-control"  id="NAMA_CUSTOMER_STNK" name="NAMA_CUSTOMER" data-mandatory="true" dataValidation="true" dataType="string" validation-string="Nama STNK" relatedTblIndex="1">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Alamat</label>
+                                                                                <textarea class="form-control" rows="1" id="ALAMAT_STNK" name="ALAMAT" data-mandatory="true" dataValidation="true" dataType="string" validation-string="Alamat STNK" relatedTblIndex="1"></textarea>
+                                                                            </div>
+                                                                            <!--<div class="form-group">-->
+                                                                                <label>Kabupaten/Kodya</label>
+                                                                                <select class="demo-default selectized" id="KODE_WILAYAH_STNK" name="KODE_WILAYAH" placeholder="Select a Kabupaten or Kodya..." data-mandatory="true" dataValidation="true" dataType="string" validation-string="Kabupaten/Kodya STNK" relatedTblIndex="1">
+                                                                                    {@direct-active-wilayah-0@}
+                                                                                </select>
+                                                                            <!--</div>-->
+                                                                            <!--<div class="form-group">-->
+                                                                                <label>Kecamatan</label>
+                                                                                <select class="demo-default selectized" id="KODE_KECAMATAN_STNK" name="KODE_KECAMATAN" placeholder="Select a Kecamatan..." data-mandatory="true" dataValidation="true" dataType="string" validation-string="Kecamatan STNK" relatedTblIndex="1">
+
+                                                                                </select>
+                                                                            <!--</div>-->
+                                                                            <!--<div class="form-group">-->
+                                                                                <label>Desa/Kelurahan</label>
+                                                                                <select class="demo-default selectized" id="KODE_KELURAHAN_STNK" name="KODE_KELURAHAN" placeholder="Select a Desa or Kelurahan..." data-mandatory="true" dataValidation="true" dataType="string" validation-string="Desa/Kelurahan STNK" relatedTblIndex="1">
+
+                                                                                </select>
+                                                                            <!--</div>-->
+                                                                            <div class="form-group">
+                                                                                <label>Kode Pos</label>
+                                                                                <input class="form-control" id="KODEPOS_CUSTOMER_STNK" name="KODE_POS" dataValidation="true" data-mandatory="true" dataType="string" validation-string="Kode Pos STNK" relatedTblIndex="1">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>HP</label>
+                                                                                <input class="form-control" id="HP_CUSTOMER_STNK" name="HP" data-mandatory="true" dataValidation="true" dataType="string" validation-string="Nomor HP STNK" relatedTblIndex="1">
+                                                                            </div>
+                                                                            <div class="form-group" style="display: none;">
+                                                                                <label>Alt. No.</label>
+                                                                                <input class="form-control" id="ALT_CUSTOMER_STNK" name="TELP" data-mandatory="false" dataValidation="false" dataType="string" validation-string="Alternatif Telp STNK" relatedTblIndex="1">
+                                                                            </div>
+																			<textarea class="form-control" rows="3" id="ALAMAT_LENGKAP_STNK" name="ALAMAT_LENGKAP" style="display: none;" data-mandatory="false" dataValidation="false" dataType="string" relatedTblIndex="1"></textarea>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="buildCustomerSTNK()">Submit</button>
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+														<div class="form-group">
+                                                            <label>Alamat</label>
+                                                            <textarea class="form-control" rows="3" name="ALAMAT_STNK" nosave="true" readonly></textarea>
+                                                        </div>
+
+														<!-- Modal -->
+                                                        <div id="kirim" class="modal fade" role="dialog">
+                                                            <div class="modal-dialog">
+
+                                                                <!-- Modal content-->
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                        <h4 class="modal-title">Customer Database</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                            <div class="form-group">
+                                                                                <label>Nama Customer</label>
+																				<input type="hidden" class="form-control" id="KODE_CUSTOMER_KIRIM" name="KODE_CUSTOMER" data-mandatory="false" dataType="string" dataKey="1" data-flag="autonumber:true" relatedTblIndex="2">
+                                                                                <input type="hidden" class="form-control" id="JENIS_CUSTOMER_KIRIM" name="JENIS_CUSTOMER" data-mandatory="false" dataType="string" value="PERORANGAN" relatedTblIndex="2">
+																				<input class="form-control"  id="NAMA_CUSTOMER_KIRIM" name="NAMA_CUSTOMER" data-mandatory="false" dataValidation="true" dataType="string" relatedTblIndex="2">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Alamat</label>
+                                                                                <textarea class="form-control" rows="1" id="ALAMAT_KIRIM" name="ALAMAT" data-mandatory="false" dataValidation="true" dataType="string" relatedTblIndex="2"></textarea>
+                                                                            </div>
+                                                                            <!--<div class="form-group">-->
+                                                                                <label>Kabupaten/Kodya</label>
+                                                                                <input class="form-control" id="KODE_WILAYAH_KIRIM" name="KODE_WILAYAH" data-mandatory="false" dataValidation="true" dataType="string" relatedTblIndex="2">
+                                                                            <!--</div>-->
+                                                                            <!--<div class="form-group">-->
+                                                                                <label>Kecamatan</label>
+                                                                                 <input class="form-control" id="KODE_KECAMATAN_KIRIM" name="KODE_KECAMATAN" data-mandatory="false" dataValidation="true" dataType="string" relatedTblIndex="2">
+                                                                            <!--</div>-->
+                                                                            <!--<div class="form-group">-->
+                                                                                <label>Desa/Kelurahan</label>
+                                                                                 <input class="form-control" id="KODE_KELURAHAN_KIRIM" name="KODE_KELURAHAN" data-mandatory="false" dataValidation="true" dataType="string" relatedTblIndex="2">
+                                                                            <!--</div>-->
+                                                                            <div class="form-group">
+                                                                                <label>Kode Pos</label>
+                                                                                <input class="form-control" id="KODEPOS_CUSTOMER_KIRIM" name="KODE_POS" data-mandatory="false" dataValidation="true" dataType="string" relatedTblIndex="2">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>HP</label>
+                                                                                <input class="form-control" id="HP_CUSTOMER_KIRIM" name="HP" data-mandatory="false" dataValidation="true" dataType="string" relatedTblIndex="2">
+                                                                            </div>
+                                                                            <div class="form-group" style="display: none;">
+                                                                                <label>Alt. No.</label>
+                                                                                <input class="form-control" id="ALT_CUSTOMER_KIRIM" name="TELP" data-mandatory="false" dataValidation="false" dataType="string" relatedTblIndex="2">
+                                                                            </div>
+																			<textarea class="form-control" rows="3" id="ALAMAT_LENGKAP_STNK" name="ALAMAT_LENGKAP" style="display: none;" data-mandatory="false" dataValidation="false" dataType="string" relatedTblIndex="2"></textarea>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label>Kartu Identitas</label>
+                                                            <select class="form-control" name="ID_CARD" data-mandatory="false" dataType="string">
+                                                                <option>1. FC. KTP</option>
+                                                                <option>2. RESI (KTP SEMENTARA)</option>
+                                                                <option>3. SIM</option>
+                                                                <option>4. IDENTITAS PERUSAHAAN/INSTANSI</option>
+                                                                <option>5. BELUM ADA</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>No. Kartu Identitas</label>
+                                                            <input class="form-control" name="NO_ID_CARD" data-mandatory="false" validation-string="Nomor Identitas" dataType="string">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                        </div>
+                                        <!-- /.col-lg-6 (nested) -->
+                                        <div class="col-lg-6">
+                                            <div class="panel panel-{@themes@}">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">Data Unit, Penjual & Cara Bayar</h3>
+                                                </div>
+                                                <div class="panel-body">
+													<script>
+													var jsonUnitType ={@direct-active-vehicletype-0@};
+													</script>
+                                                    <!--<div class="form-group">-->
+                                                        <label>Tipe Motor</label>
+														<!--<div class="form-group input-group">-->
+															<select class="demo-default selectized" id="unittype" placeholder="Select a unit type..." data-mandatory="true" dataType="string" validation-string="Tipe Motor" name="KODE_TIPE" ></select>
+															<!--<span class="input-group-btn" style="top: -1px;">
+																<button type="button" class="btn btn-default glyphicon glyphicon-refresh"></button>
+															</span>
+														</div>-->
+													<!--</div>-->
+                                                    <!--<div class="form-group">-->
+                                                        <label>Warna Motor</label>
+                                                        <select id="unitcolour" class="demo-default selectized" placeholder="Select a unit colour..." data-mandatory="true" validation-string="Warna Motor" dataType="string" name="KODE_WARNA">
+                                                        </select>
+                                                    <!--</div>-->
+                                                    <div class="form-group">
+                                                        <label>Tahun Rakit</label>
+                                                        <input class="form-control" data-mandatory="false" dataType="string" validation-string="Tahun Rakit" name="TAHUN_RAKIT" value="{@tahun-rakit@}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Jenis Harga</label>
+                                                        <select class="form-control" data-mandatory="false" dataType="string" name="GOL_HARGA">
+                                                            <option value='1. HARGA ON THE ROAD'>1. HARGA ON THE ROAD</option>
+                                                            <option value='2. HARGA OFF THE ROAD'>2. HARGA OFF THE ROAD</option>
+                                                            <option value='3. HARGA JUAL KE DEALER LAIN'>3. HARGA JUAL KE DEALER LAIN</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Harga</label>
+                                                        <div class="form-group input-group">
+                                                            <span class="input-group-addon">Rp.</span>
+                                                            <input class="form-control" style="text-align: right;" data-mandatory="true" dataType="numeric" name="HARGA" disabled>
+                                                            <span class="input-group-addon">.00</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Tipe Jual</label>
+                                                        <select class="form-control" data-mandatory="false" dataType="string" name="TIPE_JUAL" disabled>
+                                                            <option value="DIRECT SALES">DIRECT SALES</option>
+                                                        </select>
+                                                    </div>
+                                                    <!--<div class="form-group">-->
+                                                        <label>Dijual oleh</label>
+                                                        <select class="" dataType="string" data-mandatory="false" validation-string="Jenis Penjual" id="salestype" name="JENIS_SALES" placeholder="Select Sales Type..." >
+                                                            {@direct-active-salestype-0@}
+                                                        </select>
+                                                    <!--</div>-->
+                                                    <!--<div class="form-group">-->
+                                                        <label>Supervisor</label>
+														<!--<div class="form-group input-group">-->
+															 <select class="" data-mandatory="true" dataType="string" validation-string="Supervisor" nosave="true" id="supervisor" name="SPV_ID_X">
+																{@ajax-related-supervisor-salestype@}
+															</select>
+															<!--<span class="input-group-btn" style="top: -1px;">
+																<button type="button" class="btn btn-default glyphicon glyphicon-refresh"></button>
+															</span>
+														</div>  -->
+                                                    <!--</div>-->
+                                                    <!--<div class="form-group">-->
+                                                        <label>Koordinator</label>
+                                                        <!--<div class="form-group input-group">-->
+															<select class="" data-mandatory="true" dataType="string" validation-string="Koordinator" nosave="true" id="koordinator" name="KOORD_ID_X">
+																{@ajax-related-koordinator-supervisor@}
+															</select>
+															<!--<span class="input-group-btn" style="top: -1px;">
+																<button type="button" class="btn btn-default glyphicon glyphicon-refresh"></button>
+															</span>
+														</div>
+                                                    </div>-->
+                                                    <!--<div class="form-group">-->
+                                                        <label>Sales</label>
+														<!--<div class="form-group input-group">-->
+                              <input type="hidden" name="SPV_ID" data-mandatory="true" dataType="string">
+															<input type="hidden" name="NAMA_SUPERVISOR" data-mandatory="false" dataType="string">
+                              <input type="hidden" name="KOORD_ID" data-mandatory="true" dataType="string">
+															<input type="hidden" name="KOORDINATOR" data-mandatory="false" dataType="string">
+															<input type="hidden" name="NOMOR_GROUP" data-mandatory="false" dataType="string">
+															<input type="hidden" name="SALES_ID" data-mandatory="true" dataType="string" validation-string="Sales">
+															<input type="hidden" name="NAMA_SALES" data-mandatory="true" dataType="string" validation-string="Sales">
+															<input type="hidden" name="JABATAN_SLS" data-mandatory="false" dataType="string">
+
+															<select class="" data-mandatory="false" dataType="string" validation-string="Sales" nosave="true" id="sales" name="SALES_ID_DUMMY">
+																{@ajax-related-salesperson-koordinator@}
+															</select>
+															<!--<span class="input-group-btn" style="top: -1px;">
+																<button type="button" class="btn btn-default glyphicon glyphicon-refresh"></button>
+															</span>
+														</div>
+                                                    </div>-->
+                                                    <!--<div class="form-group">-->
+                                                        <label>Asal SPK</label>
+														<!--<div class="input-group">-->
+                                                            <input type="hidden" name="NAMA_ASAL_SPK" data-mandatory="false" dataType="string">
+															<select class=""  id="asalspk" placeholder="Select an Asal SPK..." data-mandatory="true" dataType="string" validation-string="Asal SPK" NAME="KODE_ASAL_SPK">
+																{@direct-active-stocklocation-0@}
+															</select>
+															<!--<span class="input-group-btn" style="top: -3px;">
+																<button type="button" class="btn btn-default glyphicon glyphicon-refresh" style="height: 36px;"></button>
+															</span>
+														</div>-->
+                                                    <!--</div>-->
+                                                    <div class="form-group">
+                                                        <label>Mediator</label>
+                                                        <input class="form-control" data-mandatory="false" dataType="string" validation-string="Mediator" name="NAMA_MEDIATOR">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Pembayaran</label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="CARA_BAYAR_OPT" id="optKredit" value="KREDIT" checked nosave="true" onclick="$('#paymentkreditlink').trigger('click');$('input[name=CARA_BAYAR]').val(this.value);usingFinCoy=true;" dataType="string">Kredit
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="CARA_BAYAR_OPT" id="optCash" value="CASH" nosave="true" onclick="$('#paymentcashlink').trigger('click');$('input[name=CARA_BAYAR]').val(this.value);usingFinCoy=false;" dataType="string">Cash
+                                                        </label>
+														<input type="hidden" class="form-control" data-mandatory="false" dataType="string" name="CARA_BAYAR" value="KREDIT">
+                                                    </div>
+                                                    <div class="panel-heading" id="paymentselection" style="display: none;">
+														<ul class="nav nav-tabs">
+															<li class="active"><a href="#kredit" data-toggle="tab" id="paymentkreditlink">Kredit</a></li>
+															<li><a href="#cash" data-toggle="tab" id="paymentcashlink">Cash</a></li>
+														</ul>
+													</div>
+													<div class="panel-body">
+														<div class="tab-content">
+															<div class="tab-pane fade in active" id="kredit">
+                                                                <!--<div class="form-group">-->
+                                                                    <label>Leasing</label>
+																	<!--<div class="form-group input-group">-->
+																		<select class="" id="leasing" placeholder="Select a Leasing..." data-mandatory="true-false" dataType="string" validation-string="Leasing" name="KODE_LEASING">
+																			{@direct-active-fincoy-0@}
+																		</select>
+																		<!--<span class="input-group-btn" style="top: -1px;">
+																			<button type="button" class="btn btn-default glyphicon glyphicon-refresh"></button>
+																		</span>
+																	</div>
+                                                                </div>-->
+                                                                <div class="form-group">
+                                                                    <label>Program</label>
+                                                                    <input class="form-control" data-mandatory="false" dataType="string" validation-string="Sales Program" name="SALES_PROGRAM">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Surveyor</label>
+                                                                    <input class="form-control" data-mandatory="false" dataType="string" validation-string="Surveyor" name="SURVEYOR">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>DP System</label>
+                                                                    <div class="form-group input-group">
+                                                                        <span class="input-group-addon">Rp.</span>
+                                                                        <input type="number" class="form-control" style="text-align: right;" data-mandatory="true-false" validation-string=DP System" dataType="numeric" name="DP_SYSTEM">
+                                                                        <span class="input-group-addon">.00</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Angsuran</label>
+                                                                    <div class="form-group input-group">
+                                                                        <span class="input-group-addon">Rp.</span>
+                                                                        <input type="number" class="form-control" style="text-align: right;" data-mandatory="true-false" dataType="numeric" validation-string="Angsuran" name="ANGSURAN">
+                                                                        <span class="input-group-addon">.00</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Tenor</label>
+                                                                    <input type="number" class="form-control" style="text-align: right;" data-mandatory="true-false" dataType="numeric" validation-string="Tenor" name="TENOR">
+                                                                </div>
+
+                                                        </div>
+                                                        <div class="tab-pane fade" id="cash">
+                                                            <h4>Cash Information</h4>
+                                                            <p>Payment done without Finance Company</p>
+                                                        </div>
+                                                    </div>
+												  </div>
+                                                </div>
+
+                                            </div>
+                                            <!--Start Hidden fields Stocks-->
+                                            <input type="hidden" name="ROADOFSPK" data-mandatory="false" dataType="numeric" value="0">
+                                            <input type="hidden" name="MODIFY_STATUS" nosave="true" value="{@mode@}">
+											<div style="display: none">
+												<label>Alamat</label>
+												<textarea rows="3" name="jsonobject" nosave="true"></textarea>
+											</div>
+                                            <!--End Hidden fields-->
+                                            <button type="submit" id="submitform" class="btn btn-default">Submit</button>
+                                            <button type="button" id="clearform" class="btn btn-default">Clear</button>
+
+                                        </div>
+                                        <!-- /.col-lg-6 (nested) -->
+										</form>
+                                    </div>
+                                    <!-- /.row (nested) -->
+                                <!--</div>-->
+                                <!-- /.panel-body -->
+                            <!--</div>-->
+                            <!-- /.panel -->
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
+                </div>

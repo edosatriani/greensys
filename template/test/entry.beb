@@ -1,0 +1,104 @@
+ <div id="page-wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!--<div class="panel panel-{@themes@}">-->
+                                <!--<div class="panel-heading">
+                                    ...
+                                </div>
+                                <div class="panel-body">-->
+                                    <div class="row">
+										<form role="form" method="POST" id="mainForm" action="index.php?app=ob_update" onsubmit="return saveEntry('{@mode@}');">
+										<div class="col-lg-6">
+											<div class="panel panel-{@themes@}">
+												<div class="panel-heading">
+                                                    <h3 class="panel-title">Entry Green Tyre</h3>
+                                                </div>
+                                                <div class="panel-body">
+													<div class="form-group">
+														<label>Session ID : {@session-id@}</label>
+														<input type="hidden" class="form-control" data-mandatory="true" dataType="string" dataKey="1" validation-string="Session ID" name="SESSION_ID" value="{@session-id@}" readonly>
+													</div>
+													<div class="form-group">
+														<label>No. MC</label>
+														<div class="form-group input-group">
+															<input class="form-control" data-mandatory="true" dataType="string" dataKey="1" validation-string="Nomor MC" name="NO_MC" value="{@autonumber@}" readonly>
+														</div>                                                    
+													</div>
+													<div class="form-group">
+														<label>Date</label>
+														<div class="form-group input-group">
+															<input class="form-control" type="text" data-mandatory="true" dataType="date" validation-string="Date" name="DT" value="{@today@}" readonly>
+														</div>
+													</div>
+													<div class="form-group">
+														<label>Time</label>
+														<div class="form-group input-group">
+															<input class="form-control" data-mandatory="true" dataType="string" dataKey="0" validation-string="Time" name="TM" value="{@time@}" readonly>
+														</div>                                                    
+													</div>
+												   <div class="form-group">
+														<label>Size</label>
+														<div class="form-group input-group">
+															<script>
+																var jsonSize ={@direct-active-size-0@};	
+																var currentSize='{@current-active-size@}';	
+															</script>
+															<select class="" id="sizing" placeholder="Select an active Size..." data-mandatory="true" dataType="string" validation-string="Size" name="SIZE_ID">
+															</select>
+														</div>                                                    
+													</div>
+													<div class="form-group">
+														<label>Barcode</label>
+														<div class="form-group input-group">
+															<input class="form-control" data-mandatory="true" dataType="string" dataKey="1" validation-string="Barcode" name="BARCODE">
+														</div>                                                    
+													</div>
+													<div>
+														<!--Start Hidden fields Stocks-->
+														<input type="hidden" name="MODIFY_STATUS" nosave="true" value="{@mode@}">
+														<div style="display: none">
+															<textarea rows="3" name="jsonobject" nosave="true"></textarea>
+														</div>
+														<!--End Hidden fields-->
+														<button type="submit" class="btn btn-default">Submit</button>
+														<button type="button" id="newsession" class="btn btn-default">New Session</button>
+													</div>
+												</div>
+											</div>
+                                        </div>
+										
+										<!-- /.col-lg-6 (nested) -->
+										<div class="col-lg-6">
+											<div class="panel panel-{@themes@}">
+                                                <div class="panel-heading custom">
+                                                    <div class="panel-heading-content floatleft">
+														<h3 class="panel-title">Received Green Tyre</h3>
+													</div>
+													<div class="panel-heading-content floatright">
+														Active Session : {@active-session-count@} Records
+													</div>
+                                                </div>
+                                                <div class="panel-body">
+													{@active-trans-0@}
+												</div>
+											</div>
+										</div>
+										<!-- /.col-lg-6 (nested) -->
+										
+                                        <!-- /.col-lg-6 (nested) -->
+                                        <div class="col-lg-12">
+                                            
+                                        </div>
+                                        <!-- /.col-lg-6 (nested) -->
+										</form>
+                                    </div>
+                                    <!-- /.row (nested) -->
+                                <!--</div>-->
+                                <!-- /.panel-body -->
+                            <!--</div>-->
+                            <!-- /.panel -->
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
+                </div>

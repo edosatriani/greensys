@@ -1,0 +1,31 @@
+Options All -Indexes
+RewriteEngine on
+RewriteRule login index.php?app=login
+RewriteRule logout index.php?app=logout
+RewriteRule log-action index.php?app=login&param=exec
+RewriteRule page-not-found err_404.html
+RewriteRule page-error err_500.html
+RewriteRule dashboard index.php?app=dashboard
+RewriteRule web-log index.php?app=web_log
+RewriteRule save-object index.php?app=object
+RewriteRule entry-spk index.php?app=spk
+RewriteRule po-statement index.php?app=po
+RewriteRule unit-distribution index.php?app=do
+RewriteRule stock index.php?app=stock
+RewriteRule loadspk_(.*) index.php?app=spk&param=$1
+RewriteRule loadpo_(.*) index.php?app=po&param=$1
+RewriteRule getunitcolour_(.*) index.php?app=spk&sub_app=ajax_spk&mode=101&param=$1
+RewriteRule getsupervisor_(.*) index.php?app=spk&sub_app=ajax_spk&mode=102&param=$1
+RewriteRule getkoordinator_(.*)_(.*) index.php?app=spk&sub_app=ajax_spk&mode=103&param=$1&param2=$2
+RewriteRule getsalesforce_(.*)_(.*)_(.*)_(.*) index.php?app=spk&sub_app=ajax_spk&mode=104&param=$1&param2=$2&param3=$3&param4=$4
+RewriteRule getunitprice_(.*)_(.*) index.php?app=spk&sub_app=ajax_spk&mode=105&param=$1&param2=$2
+RewriteRule getkecamatan_(.*) index.php?app=spk&sub_app=ajax_spk&mode=106&param=$1
+RewriteRule getkelurahan_(.*) index.php?app=spk&sub_app=ajax_spk&mode=107&param=$1
+RewriteRule runinqury_(.*)_(.*) index.php?app=spk&sub_app=ajax_spk&mode=108&param=$1&param2=$2
+RewriteRule inqurydetail_(.*) index.php?app=spk&sub_app=ajax_spk&mode=109&param=$1
+
+#### Rule for Error Page - 404 ####
+ErrorDocument 404 http://localhost/greensys/page-not-found
+
+#### Rule for Error Page - 500 ####
+ErrorDocument 500 http://localhost/greensys/page-error

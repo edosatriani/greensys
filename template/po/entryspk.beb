@@ -1,0 +1,168 @@
+ <div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <form role="form" method="POST" id="mainForm" action="save-object" onsubmit="return saveSPK('{@mode@}');">
+				<div class="col-lg-6">
+                        <div class="form-group">
+                            <label>No. SPK</label>
+                            <div class="form-group input-group">
+                                <input class="form-control" data-mandatory="true" dataType="string" dataKey="1" validation-string="Nomor SPK" id="nospk" name="NO_SPK" {@readonlymode@}>
+                                <span class="input-group-btn" style="top: -1px;">
+									<button type="button" class="btn btn-default glyphicon glyphicon-search" id="searchspk" ></button>
+								</span>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-{@themes@}">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Data Pemohon</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label>Nama Customer</label>
+                                    <input class="form-control" name="NAMA_CUSTOMER" nosave="true" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Alamat</label>
+                                    <textarea class="form-control" rows="3" name="ALAMAT_CUSTOMER" nosave="true" readonly></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-{@themes@}">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">PO Details</h3>
+                            </div>
+                            <div class="panel-body">
+								<div class="form-group">
+									<label>Leasing</label>
+									<select class="" id="leasing" placeholder="Select a Leasing..." data-mandatory="true-false" dataType="string" validation-string="Leasing" name="KODE_LEASING">
+										{@direct-active-fincoy-0@}
+									</select>
+                                </div>
+
+								<div class="form-group">
+									<label>Tgl. PO</label>
+									<div class="input-append date" id="dp3" data-date="{@today@}" data-date-format="mm/dd/yyyy">
+										<input class="form-control datepicker" size="16" type="text" data-mandatory="true" dataType="date" validation-string="Tanggal PO" name="TGL_PO" value="{@today@}">
+									</div>
+								</div>
+
+								<div class="form-group">
+                                    <label>Jenis PO</label>
+                                    <select class="form-control" name="JENIS_PO" dataType="string" data-case="0">
+                                        <option value='1. PO ASLI'>1. PO ASLI</option>
+                                        <option value='2. PO SEMENTARA'>2. PO SEMENTARA</option>
+                                        <option value='3. NONE'>3. NONE</option>
+                                    </select>
+                                </div>
+
+								<div class="form-group">
+									<label>Tgl. Terima PO</label>
+									<div class="input-append date" id="dp3" data-date="{@today@}" data-date-format="mm/dd/yyyy">
+										<input class="form-control datepicker" size="16" type="text" data-mandatory="true" dataType="date" validation-string="Tanggal Terima PO" name="TGL_TERIMAPO" value="{@today@}">
+									</div>
+								</div>
+
+                                <div class="form-group">
+                                    <label>Nomor PO</label>
+                                    <input class="form-control" name="NOMOR_PO" nosave="true" data-mandatory="false" dataType="string" validation-string="Nomor PO">
+                                </div>
+
+								<div class="form-group">
+                                    <label>Catatan PO</label>
+                                    <input class="form-control" name="KETERANGAN" nosave="true" data-mandatory="false" dataType="string" validation-string="Catatan PO">
+                                </div>
+
+                            </div>
+                        </div>
+                </div>
+                <!-- /.col-lg-6 (nested) -->
+                <div class="col-lg-6">
+                    <div class="panel panel-{@themes@}">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Data Unit, Penjual & Harga</h3>
+                        </div>
+                        <div class="panel-body">
+							<div class="form-group">
+                                <label>Tipe</label>
+                                <input class="form-control" name="TIPE" nosave="true" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Warna</label>
+                                <input class="form-control" name="WARNA" nosave="true" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sales</label>
+                                <input class="form-control" name="SALES" nosave="true" readonly>
+                            </div>
+
+							<div class="form-group">
+								<label>Surveyor</label>
+								<input class="form-control" data-mandatory="false" dataType="string" validation-string="Surveyor" name="SURVEYOR">
+							</div>
+
+							<div class="form-group">
+                                <label>Harga</label>
+                                <div class="form-group input-group">
+                                    <span class="input-group-addon">Rp.</span>
+                                    <input class="form-control" style="text-align: right;" data-mandatory="true" dataType="numeric" id="HARGA" name="HARGA" >
+                                    <span class="input-group-addon">.00</span>
+                                </div>
+                            </div>
+
+							<div class="form-group">
+								<label>DP System</label>
+								<div class="form-group input-group">
+									<span class="input-group-addon">Rp.</span>
+									<input type="number" class="form-control" style="text-align: right;" data-mandatory="true-false" validation-string="DP System" dataType="numeric" id="DP_SYSTEM" name="DP_SYSTEM">
+									<span class="input-group-addon">.00</span>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label>Angsuran</label>
+								<div class="form-group input-group">
+									<span class="input-group-addon">Rp.</span>
+									<input type="number" class="form-control" style="text-align: right;" data-mandatory="true-false" dataType="numeric" validation-string="Angsuran" name="ANGSURAN">
+									<span class="input-group-addon">.00</span>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label>Tenor</label>
+								<input type="number" class="form-control" style="text-align: right;" data-mandatory="true-false" dataType="numeric" validation-string="Tenor" name="TENOR">
+							</div>
+                        </div>
+
+
+
+                    </div>
+					 <!--Start Hidden fields Stocks-->
+                    <input type="hidden" name="STATUS_ARL" data-mandatory="false" dataType="string" value="Y">
+                    <input type="hidden" name="NO_BUKTI_ARL" data-mandatory="false" dataType="string" dataKey="0" data-flag="related-field:NO_BUKTI:0:999">
+                    <input type="hidden" id="ARL_AMOUNT" name="ARL_AMOUNT" data-mandatory="false" dataType="numeric">
+                    <input type="hidden" id="ARL_PAID" name="ARL_PAID" data-mandatory="false" dataType="numeric">
+                    <input type="hidden" id="ARL_BALANCE" name="ARL_BALANCE" data-mandatory="false" dataType="numeric">
+                    <input type="hidden" name="ROADOFSPK" data-mandatory="false" dataType="numeric" value="3">
+					<input type="hidden" name="MODIFY_STATUS" nosave="true" value="{@mode@}">
+                    <input type="hidden" name="TS" id="TS" nosave="true" value="{@today@}">
+					<div style="display: none">
+						<textarea rows="3" name="jsonobject" nosave="true"></textarea>
+					</div>
+					<!--End Hidden fields-->
+					<button type="submit" class="btn btn-default">Submit Button</button>
+					<button type="button" id="clearform" class="btn btn-default">Reset Button</button>
+                </div>
+                <!-- /.col-lg-6 (nested) -->
+
+				</form>
+            </div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+</div>

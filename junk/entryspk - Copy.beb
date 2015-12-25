@@ -1,0 +1,441 @@
+ <div id="page-wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-{@themes@}">
+                                <div class="panel-heading">
+                                    ...
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <form role="form" method="POST" id="mainForm" action="objectupdate.php" onsubmit="return saveSPK();">
+										<div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label>No. SPK</label>
+                                                    <div class="form-group input-group">
+                                                        <input class="form-control" dataType="string" id="nospk" name="NO_SPK" value="{@autonumber@}">
+                                                        <span class="input-group-btn" style="top: -1px;">
+															<button type="button" class="btn btn-default glyphicon glyphicon-search" id="searchspk" ></button>
+														</span>
+                                                    </div>
+                                                    <p class="help-block">Automatic Number</p>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Tgl. SPK</label>
+                                                    <div class="input-append date" id="dp3" data-date="{@today@}" data-date-format="mm/dd/yyyy">
+                                                        <input class="form-control datepicker" size="16" type="text" dataType="date" name="TGL_SPK" value="{@today@}">
+                                                        <span class="add-on"><i class="icon-th"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-{@themes@}">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title">Data Pemohon</h3>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="form-group">
+                                                            <label>Jenis Konsumen</label>
+                                                            <select class="form-control" name="JENIS_KONSUMEN" dataType="string">
+                                                                <option value='I. Individual Customer (Reguler)'>I. Individual Customer (Reguler)</option>
+                                                                <option value='J. Individual Customer (Joint Promo)'>J. Individual Customer (Joint Promo)</option>
+                                                                <option value='C. Individual Customer (Kolektif)'>C. Individual Customer (Kolektif)</option>
+                                                                <option value='G. Group Customer'>G. Group Customer</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="disabledSelect">Nama Instansi</label>
+                                                            <input class="form-control" dataType="string" type="text" name="NAMA_INSTANSI" disabled="">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Nama Customer</label>
+                                                            <div class="form-group input-group">
+                                                                <input class="form-control" nosave="true" name="NAMA_PEMOHON" readonly>
+                                                                <span class="input-group-btn" style="top: -1px;">
+																	<button type="button" class="btn btn-default glyphicon glyphicon-pencil" id="entrypemohon"></button>
+																</span>
+                                                            </div>
+                                                            <input type="hidden" name="CUSTOMER_BELI" id="CUSTOMER_BELI" dataType="string" data-flag="related-field:KODE_CUSTOMER_0">
+                                                            <!-- Trigger the modal with a button -->
+
+
+                                                            <!-- Modal -->
+                                                            <div id="pemohon" class="modal fade" role="dialog">
+                                                                <div class="modal-dialog">
+
+                                                                    <!-- Modal content-->
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                            <h4 class="modal-title">Customer Database</h4>
+                                                                        </div>
+                                                                        <div class="modal-body">
+																			<div id="error_on_beli"class="alert alert-danger" role="alert" style="display: none;">
+																			  <strong>Oh snap!</strong> Change a few things up and try submitting again.
+																			</div>
+                                                                            <p>
+                                                                                <div class="form-group">
+                                                                                    <label>Nama Customer</label>
+																					<input type="hidden" class="form-control" id="KODE_CUSTOMER_BELI" name="KODE_CUSTOMER" dataType="string" data-flag="autonumber:true" relatedTblIndex="0">
+                                                                                    <input class="form-control" id="NAMA_CUSTOMER_BELI" name="NAMA_CUSTOMER"  dataValidation="true" dataType="string" relatedTblIndex="0">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label>Alamat</label>
+                                                                                    <textarea class="form-control" rows="3" id="ALAMAT_BELI" name="ALAMAT"  dataValidation="true" dataType="string" relatedTblIndex="0"></textarea>
+                                                                                </div>
+                                                                                <!--<div class="form-group">-->
+                                                                                    <label>Kabupaten/Kodya</label>
+                                                                                    <select class="demo-default selectized" id="KODE_WILAYAH_BELI" name="KODE_WILAYAH" placeholder="Select a Kabupaten or Kodya..." dataValidation="true" dataType="string" relatedTblIndex="0">
+                                                                                        {@direct-active-wilayah-0@}
+                                                                                    </select>
+                                                                                <!--</div>-->
+                                                                                <!--<div class="form-group">-->
+                                                                                    <label>Kecamatan</label>
+                                                                                    <select class="demo-default selectized" id="KODE_KECAMATAN_BELI" name="KODE_KECAMATAN" placeholder="Select a Kecamatan..." dataValidation="true" dataType="string" relatedTblIndex="0">
+
+                                                                                    </select>
+                                                                                <!--</div>-->
+                                                                                <!--<div class="form-group">-->
+                                                                                    <label>Desa/Kelurahan</label>
+                                                                                    <select class="demo-default selectized" id="KODE_KELURAHAN_BELI" name="KODE_KELURAHAN" placeholder="Select a Desa or Kelurahan..." dataValidation="true" dataType="string" relatedTblIndex="0">
+
+                                                                                    </select>
+                                                                                <!--</div>-->
+                                                                                <div class="form-group">
+                                                                                    <label>Kode Pos</label>
+                                                                                    <input class="form-control" id="KODEPOS_CUSTOMER_BELI" name="KODE_POS"  dataValidation="true" dataType="string" relatedTblIndex="0">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label>HP</label>
+                                                                                    <input class="form-control" id="HP_CUSTOMER_BELI" name="HP"  dataValidation="true" dataType="string" relatedTblIndex="0">
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label>Alt. No.</label>
+                                                                                    <input class="form-control"  id="ALT_CUSTOMER_BELI" name="TELP"  dataValidation="false" dataType="string" relatedTblIndex="0">
+                                                                                </div>
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-default" onclick="buildCustomerBeli();">Submit</button>
+                                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Alamat</label>
+                                                            <textarea class="form-control" rows="3" name="ALAMAT_PEMOHON" nosave="true" readonly></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="panel panel-{@themes@}">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title">Data STNK</h3>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="form-group">
+                                                            <label>Nama Customer</label>
+                                                            <div class="form-group input-group">
+                                                                <input class="form-control" name="NAMA_STNK" nosave="true" readonly>
+                                                                <span class="input-group-btn" style="top: -1px;">
+																	<button type="button" class="btn btn-default glyphicon glyphicon-pencil" data-toggle="modal" data-target="#stnk"></button>
+																</span>
+                                                            </div>
+                                                            <input type="hidden" name="CUSTOMER_STNK" dataType="string" data-flag="related-field:KODE_CUSTOMER_1">
+                                                            <input type="hidden" name="CUSTOMER_KIRIM" dataType="string">
+                                                        </div>
+
+                                                        <!-- Modal -->
+                                                        <div id="stnk" class="modal fade" role="dialog">
+                                                            <div class="modal-dialog">
+
+                                                                <!-- Modal content-->
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                        <h4 class="modal-title">Customer Database</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>
+                                                                            <div class="form-group">
+                                                                                <label>Nama Customer</label>
+																				<input type="hidden" class="form-control" id="KODE_CUSTOMER_STNK" name="KODE_CUSTOMER" dataType="string" data-flag="autonumber:true" relatedTblIndex="1">
+                                                                                <input class="form-control"  id="NAMA_CUSTOMER_STNK" name="NAMA_CUSTOMER" dataValidation="true" dataType="string" relatedTblIndex="1">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Alamat</label>
+                                                                                <textarea class="form-control" rows="3" id="ALAMAT_STNK" name="ALAMAT" dataValidation="true" dataType="string" relatedTblIndex="1"></textarea>
+                                                                            </div>
+                                                                            <!--<div class="form-group">-->
+                                                                                <label>Kabupaten/Kodya</label>
+                                                                                <select class="demo-default selectized" id="KODE_WILAYAH_STNK" name="KODE_WILAYAH" placeholder="Select a Kabupaten or Kodya..." dataValidation="true" dataType="string" relatedTblIndex="1">
+                                                                                    {@direct-active-wilayah-0@}
+                                                                                </select>
+                                                                            <!--</div>-->
+                                                                            <!--<div class="form-group">-->
+                                                                                <label>Kecamatan</label>
+                                                                                <select class="demo-default selectized" id="KODE_KECAMATAN_STNK" name="KODE_KECAMATAN" placeholder="Select a Kecamatan..." dataValidation="true" dataType="string" relatedTblIndex="1">
+
+                                                                                </select>
+                                                                            <!--</div>-->
+                                                                            <!--<div class="form-group">-->
+                                                                                <label>Desa/Kelurahan</label>
+                                                                                <select class="demo-default selectized" id="KODE_KELURAHAN_STNK" name="KODE_KELURAHAN" placeholder="Select a Desa or Kelurahan..." dataValidation="true" dataType="string" relatedTblIndex="1">
+
+                                                                                </select>
+                                                                            <!--</div>-->
+                                                                            <div class="form-group">
+                                                                                <label>Kode Pos</label>
+                                                                                <input class="form-control" id="KODEPOS_CUSTOMER_STNK" name="KODE_POS" dataValidation="true" dataType="string" relatedTblIndex="1">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label style="width: 10%;display: inline;">HP</label>
+                                                                                <input class="form-control" id="HP_CUSTOMER_STNK" name="HP" dataValidation="true" dataType="string" relatedTblIndex="1" style="width: 40%;display: inline;">
+																				<label style="width: 10%;display: inline;">Alt. No.</label>
+                                                                                <input class="form-control" id="ALT_CUSTOMER_STNK" name="TELP" dataValidation="false" dataType="string" relatedTblIndex="1" style="width: 40%;display: inline;">
+                                                                            </div>
+                                                                            <!--<div class="form-group">
+                                                                                <label>Alt. No.</label>
+                                                                                <input class="form-control" id="ALT_CUSTOMER_STNK" name="TELP" dataValidation="false" dataType="string" relatedTblIndex="1">
+                                                                            </div>-->
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="buildCustomerSTNK()">Submit</button>
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Alamat</label>
+                                                            <textarea class="form-control" rows="3" name="ALAMAT_STNK" nosave="true" readonly></textarea>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Kartu Identitas</label>
+                                                            <select class="form-control" name="ID_CARD" dataType="string">
+                                                                <option>1. FC. KTP</option>
+                                                                <option>2. RESI (KTP SEMENTARA)</option>
+                                                                <option>3. SIM</option>
+                                                                <option>4. IDENTITAS PERUSAHAAN/INSTANSI</option>
+                                                                <option>5. BELUM ADA</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>No. Kartu Identitas</label>
+                                                            <input class="form-control" name="NO_ID_CARD" dataType="string">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                        </div>
+                                        <!-- /.col-lg-6 (nested) -->
+                                        <div class="col-lg-6">
+                                            <div class="panel panel-{@themes@}">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">Data Unit, Penjual & Cara Bayar</h3>
+                                                </div>
+                                                <div class="panel-body">
+													<script>													
+													var jsonUnitType ={@direct-active-vehicletype-0@};													
+													</script>
+                                                    <!--<div class="form-group">-->
+                                                        <label>Tipe Motor</label>
+														<!--<div class="form-group input-group">-->
+															<select class="demo-default selectized" id="unittype" placeholder="Select a unit type..." dataType="string" name="KODE_TIPE" ></select>
+															<!--<span class="input-group-btn" style="top: -1px;">
+																<button type="button" class="btn btn-default glyphicon glyphicon-refresh"></button>
+															</span>
+														</div>-->
+													<!--</div>-->
+                                                    <!--<div class="form-group">-->
+                                                        <label>Warna Motor</label>
+                                                        <select id="unitcolour" class="demo-default selectized" placeholder="Select a unit colour..." dataType="string" name="KODE_WARNA">
+                                                        </select>
+                                                    <!--</div>-->
+                                                    <div class="form-group">
+                                                        <label>Tahun Rakit</label>
+                                                        <input class="form-control" dataType="string" name="TAHUN_RAKIT" value="{@tahun-rakit@}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Jenis Harga</label>
+                                                        <select class="form-control" dataType="string" name="GOL_HARGA">
+                                                            <option value='1. HARGA ON THE ROAD'>1. HARGA ON THE ROAD</option>
+                                                            <option value='2. HARGA OFF THE ROAD'>2. HARGA OFF THE ROAD</option>
+                                                            <option value='3. HARGA JUAL KE DEALER LAIN'>3. HARGA JUAL KE DEALER LAIN</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Harga</label>
+                                                        <div class="form-group input-group">
+                                                            <span class="input-group-addon">Rp.</span>
+                                                            <input class="form-control" style="text-align: right;" dataType="string" name="HARGA" disabled>
+                                                            <span class="input-group-addon">.00</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Tipe Jual</label>
+                                                        <select class="form-control" dataType="string" name="TIPE_JUAL" disabled>
+                                                            <option value="DIRECT SALES">DIRECT SALES</option>
+                                                        </select>
+                                                    </div>
+                                                    <!--<div class="form-group">-->
+                                                        <label>Dijual oleh</label>
+                                                        <select class="" dataType="string" id="salestype" name="JENIS_SALES">
+                                                            {@direct-active-salestype-0@}
+                                                        </select>
+                                                    <!--</div>-->
+                                                    <!--<div class="form-group">-->
+                                                        <label>Supervisor</label>
+														<!--<div class="form-group input-group">-->
+															 <select class="" dataType="string" id="supervisor" name="SPV_ID">
+																{@ajax-related-supervisor-salestype@}
+															</select>
+															<!--<span class="input-group-btn" style="top: -1px;">
+																<button type="button" class="btn btn-default glyphicon glyphicon-refresh"></button>
+															</span>
+														</div>  -->                                                     
+                                                    <!--</div>-->
+                                                    <!--<div class="form-group">-->
+                                                        <label>Koordinator</label>
+                                                        <!--<div class="form-group input-group">-->
+															<select class="" dataType="string" id="koordinator" name="KOORD_ID">
+																{@ajax-related-koordinator-supervisor@}
+															</select>
+															<!--<span class="input-group-btn" style="top: -1px;">
+																<button type="button" class="btn btn-default glyphicon glyphicon-refresh"></button>
+															</span>
+														</div>
+                                                    </div>-->
+                                                    <!--<div class="form-group">-->
+                                                        <label>Sales</label>
+														<!--<div class="form-group input-group">-->
+															<select class="" dataType="string" id="sales" name="SALES_ID">
+																{@ajax-related-salesperson-koordinator@}
+															</select>
+															<!--<span class="input-group-btn" style="top: -1px;">
+																<button type="button" class="btn btn-default glyphicon glyphicon-refresh"></button>
+															</span>
+														</div>
+                                                    </div>-->
+                                                    <!--<div class="form-group">-->
+                                                        <label>Asal SPK</label>                                                        
+														<!--<div class="input-group">-->
+															<select class=""  id="asalspk" placeholder="Select an Asal SPK..." dataType="string" NAME="ASAL_SPK">
+																{@direct-active-stocklocation-0@}
+															</select>
+															<!--<span class="input-group-btn" style="top: -3px;">
+																<button type="button" class="btn btn-default glyphicon glyphicon-refresh" style="height: 36px;"></button>
+															</span>
+														</div>-->
+                                                    <!--</div>-->
+                                                    <div class="form-group">
+                                                        <label>Keterangan</label>
+                                                        <input class="form-control" dataType="string" name="KETERANGAN">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Pembayaran</label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="CARA_BAYAR_OPT" id="optKredit" value="KREDIT" checked nosave="true" onclick="$('#paymentkreditlink').trigger('click');$('input[name=CARA_BAYAR]').val(this.value);" dataType="string">Kredit
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="CARA_BAYAR_OPT" id="optCash" value="CASH" nosave="true" onclick="$('#paymentcashlink').trigger('click');$('input[name=CARA_BAYAR]').val(this.value);" dataType="string">Cash
+                                                        </label>
+														<input type="hidden" class="form-control" dataType="string" name="CARA_BAYAR" value="KREDIT">
+                                                    </div>
+                                                    <div class="panel-heading" id="paymentselection" style="display: none;">
+														<ul class="nav nav-tabs">
+															<li class="active"><a href="#kredit" data-toggle="tab" id="paymentkreditlink">Kredit</a></li>
+															<li><a href="#cash" data-toggle="tab" id="paymentcashlink">Cash</a></li>
+														</ul>
+													</div>		
+													<div class="panel-body">
+														<div class="tab-content">
+															<div class="tab-pane fade in active" id="kredit">
+                                                                <!--<div class="form-group">-->
+                                                                    <label>Leasing</label>
+																	<!--<div class="form-group input-group">-->
+																		<select class="" id="leasing" placeholder="Select a Leasing..." dataType="string" name="KODE_LEASING">
+																			{@direct-active-fincoy-0@}
+																		</select>
+																		<!--<span class="input-group-btn" style="top: -1px;">
+																			<button type="button" class="btn btn-default glyphicon glyphicon-refresh"></button>
+																		</span>
+																	</div>
+                                                                </div>-->
+                                                                <div class="form-group">
+                                                                    <label>Program</label>
+                                                                    <select class="form-control" dataType="string" name="SALES_PROGRAM">
+                                                                        {@direct-active-salesprogram-0@}
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Surveyor</label>
+                                                                    <input class="form-control" dataType="string" name="SURVEYOR">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>DP System</label>
+                                                                    <div class="form-group input-group">
+                                                                        <span class="input-group-addon">Rp.</span>
+                                                                        <input type="number" class="form-control" style="text-align: right;" dataType="string" name="DP_SYSTEM">
+                                                                        <span class="input-group-addon">.00</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Angsuran</label>
+                                                                    <div class="form-group input-group">
+                                                                        <span class="input-group-addon">Rp.</span>
+                                                                        <input type="number" class="form-control" style="text-align: right;" dataType="string" name="ANGSURAN">
+                                                                        <span class="input-group-addon">.00</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Tenor</label>
+                                                                    <input type="number" class="form-control" style="text-align: right;" dataType="string" name="TENOR">
+                                                                </div>
+                                                           
+                                                        </div>
+                                                        <div class="tab-pane fade" id="cash">
+                                                            <h4>Cash Information</h4>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                                        </div>
+                                                    </div>
+												  </div>
+                                                </div>
+
+                                            </div>
+                                            <!--Start Hidden fields Stocks-->
+                                            <!--
+												<input type="hidden" name="ROADOFSPK">
+												<input type="hidden" name="ROADOFSPK">
+												<input type="hidden" name="ROADOFSPK">
+												<input type="hidden" name="ROADOFSPK">
+												<input type="hidden" name="ROADOFSPK">
+												<input type="hidden" name="ROADOFSPK">
+												<input type="hidden" name="ROADOFSPK">
+												-->
+                                            <input type="hidden" name="ROADOFSPK">
+											<div style="display: none">
+												<label>Alamat</label>
+												<textarea class="form-control" rows="3" name="jsonobject" nosave="true"></textarea>
+											</div>
+                                            <!--End Hidden fields-->
+                                            <button type="submit" class="btn btn-default">Submit Button</button>
+                                            <button type="reset" class="btn btn-default">Reset Button</button>
+                                            
+                                        </div>
+                                        <!-- /.col-lg-6 (nested) -->
+										</form>
+                                    </div>
+                                    <!-- /.row (nested) -->
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
+                </div>

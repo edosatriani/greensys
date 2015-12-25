@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 3.3.0 Starter Template</title>
+
+    <!-- Bootstrap -->
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  <?php
+  
+	$username = "sa";
+	$password = "masterkey";
+	$hostname = 'MYCOMPUTER-PC\SQLEXPRESS';
+	$dbname = "dbH1_PSL";
+
+	//connection to the database
+	$dbcon = mssql_connect($hostname, $username, $password)or die("Unable to connect to MSSQL");
+	//echo "Connected to MSSQL";
+
+	//select the database
+	mssql_select_db($dbname, $dbcon);
+
+	//SQL Select statement
+	$sqlselect = "SELECT KODE_TIPE, NAMA_TIPE FROM MS_UNIT_TIPE WHERE AKTIF='Y' ORDER BY NAMA_TIPE";
+
+	//Run the SQL query
+	$sqlquery = mssql_query($sqlselect);
+	
+	//Output the query results
+	$activeunittype = "";
+	while ($result = mssql_fetch_array($sqlquery))	{
+		$activeunittype .="<option value=".$result["KODE_TIPE"].">".$result["NAMA_TIPE"]."</option>";
+	}
+  
+  
+  ?>
+<div class="container">
+
+<div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Entry SPK
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <label>No. SPK</label>
+                                            <input class="form-control">
+                                            <p class="help-block">Automatic Number : </p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Tgl. SPK</label>
+                                            <input class="form-control">
+                                        </div>                         				
+										<div class="panel panel-default">
+											<div class="panel-heading">
+											  <h3 class="panel-title">Data Pemohon</h3>
+											</div>
+											<div class="panel-body">
+												<div class="form-group">
+													<label>Jenis Konsumen</label>
+													<select class="form-control">
+														<option>I. Individual Customer (Reguler)</option>
+														<option>J. Individual Customer (Joint Promo)</option>
+														<option>C. Individual Customer (Kolektif)</option>
+														<option>G. Group Customer</option>
+													</select>
+												</div>
+												<div class="form-group">
+														<label for="disabledSelect">Nama Instansi</label>
+														<input class="form-control" id="disabledInput" type="text"  disabled="" >
+												</div>
+											   <div class="form-group">
+													<label>Nama Customer</label>
+													<input class="form-control" style="margin-bottom: 5px;">
+													<!-- Trigger the modal with a button -->
+													<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add/Edit</button>
+
+													<!-- Modal -->
+													<div id="myModal" class="modal fade" role="dialog">
+													  <div class="modal-dialog">
+
+														<!-- Modal content-->
+														<div class="modal-content">
+														  <div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal">&times;</button>
+															<h4 class="modal-title">Customer Database</h4>
+														  </div>
+														  <div class="modal-body">
+															<p>
+																<div class="form-group">
+																	<label>Nama Customer</label>
+																	<input class="form-control">
+																</div>
+																<div class="form-group">
+																	<label>Alamat</label>
+																	<textarea class="form-control" rows="3"></textarea>
+																</div>
+																<div class="form-group">
+																	<label>Kabupaten/Kodya</label>
+																	<select class="form-control">
+																		<option>1. FC. KTP</option>
+																		<option>2. RESI (KTP SEMENTARA)</option>
+																		<option>3. SIM</option>
+																		<option>4. IDENTITAS PERUSAHAAN/INSTANSI</option>
+																		<option>5. BELUM ADA</option>
+																	</select>
+																</div>
+																<div class="form-group">
+																	<label>Kecamatan</label>
+																	<select class="form-control">
+																		<option>1. FC. KTP</option>
+																		<option>2. RESI (KTP SEMENTARA)</option>
+																		<option>3. SIM</option>
+																		<option>4. IDENTITAS PERUSAHAAN/INSTANSI</option>
+																		<option>5. BELUM ADA</option>
+																	</select>
+																</div>
+																<div class="form-group">
+																	<label>Desa/Kelurahan</label>
+																	<select class="form-control">
+																		<option>1. FC. KTP</option>
+																		<option>2. RESI (KTP SEMENTARA)</option>
+																		<option>3. SIM</option>
+																		<option>4. IDENTITAS PERUSAHAAN/INSTANSI</option>
+																		<option>5. BELUM ADA</option>
+																	</select>
+																</div>
+																<div class="form-group">
+																	<label>Kode Pos</label>
+																	<input class="form-control">
+																</div>
+																<div class="form-group">
+																	<label>HP</label>
+																	<input class="form-control">
+																</div>
+																<div class="form-group">
+																	<label>Alt. No.</label>
+																	<input class="form-control">
+																</div>
+															</p>
+														  </div>
+														  <div class="modal-footer">
+															<button type="button" class="btn btn-default">Submit</button>
+															<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+														  </div>
+														</div>
+
+													  </div>
+													</div>
+												</div>
+												<div class="form-group">
+													<label>Alamat</label>
+													<textarea class="form-control" rows="3"></textarea>
+												</div>
+											</div>
+										  </div>
+										  
+										  <div class="panel panel-default">
+											<div class="panel-heading">
+											  <h3 class="panel-title">Data STNK</h3>
+											</div>
+											<div class="panel-body">
+											   <div class="form-group">
+													<label>Nama Customer</label>
+													<input class="form-control">
+												</div>
+												<div class="form-group">
+													<label>Alamat</label>
+													<textarea class="form-control" rows="3"></textarea>
+												</div>
+												<div class="form-group">
+													<label>Kartu Identitas</label>
+													<select class="form-control">
+														<option>1. FC. KTP</option>
+														<option>2. RESI (KTP SEMENTARA)</option>
+														<option>3. SIM</option>
+														<option>4. IDENTITAS PERUSAHAAN/INSTANSI</option>
+														<option>5. BELUM ADA</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>No. Kartu Identitas</label>
+													<input class="form-control">
+												</div>
+											</div>
+										  </div>
+                                       
+                                     
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                                <div class="col-lg-6">
+									 <div class="panel panel-default">
+											<div class="panel-heading">
+											  <h3 class="panel-title">Data Unit, Penjual & Cara Bayar</h3>
+											</div>
+											<div class="panel-body">
+												<div class="form-group">
+													<label>Tipe Motor</label>
+													<select class="form-control">
+														{@direct-active-vehicletype-0@}
+														<?php echo $activeunittype ?>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Warna Motor</label>
+													<select class="form-control">
+														{@ajax-related-vehiclecolour-vehicletype@}
+													</select>
+												</div>
+											   <div class="form-group">
+													<label>Tahun Rakit</label>
+													<input class="form-control">
+												</div>
+												<div class="form-group">
+													<label>Jenis Harga</label>
+													<select class="form-control">
+														<option>1. Harga OTR</option>
+														<option>2. Harga Kosong</option>
+														<option>3. Harga Jual ke Dealer Lain</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Harga</label>
+													<input class="form-control">
+												</div>
+												<div class="form-group">
+													<label>Tipe Jual</label>
+													<select class="form-control">
+														{@direct-active-tipejual-0@}
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Diual oleh</label>
+													<select class="form-control">
+														{@direct-active-salestype-0@}
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Supervisor</label>
+													<select class="form-control">
+														{@ajax-related-supervisor-salestype@}
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Koordinator</label>
+													<select class="form-control">
+														{@ajax-related-koordinator-supervisor@}
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Sales</label>
+													<select class="form-control">
+														{@ajax-related-salesperson-koordinator@}
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Asal SPK</label>
+													<select class="form-control">
+														{@direct-active-salessource-0@}
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Keterangan</label>
+													<input class="form-control">
+												</div>
+												<div class="form-group">
+													<label>Pembayaran</label>
+													<label class="radio-inline">
+														<input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="Kredit" checked>Kredit
+													</label>
+													<label class="radio-inline">
+														<input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="Cash">Cash
+													</label>
+												</div>
+												<ul class="nav nav-tabs">
+													<li class="active"><a href="#kredit" data-toggle="tab" aria-expanded="true">Kredit</a>
+													</li>
+													<li class=""><a href="#cash" data-toggle="tab" aria-expanded="false">Cash</a>
+													</li>
+												</ul>
+												<div class="tab-content">
+												<div class="tab-pane fade active in" id="kredit">
+													<h4>Finance Company</h4>
+													<p>
+													<div class="form-group">
+														<label>Leasing</label>
+														<select class="form-control">
+															{@direct-active-fincoy-0@}
+														</select>
+													</div>
+													<div class="form-group">
+														<label>Program</label>
+														<select class="form-control">
+															{@direct-active-salesprogram-0@}
+														</select>
+													</div>
+													<div class="form-group">
+														<label>Surveyor</label>
+														<input class="form-control">
+													</div>
+													<div class="form-group">
+														<label>DP System</label>
+														<input class="form-control">
+													</div>
+													<div class="form-group">
+														<label>Angsuran</label>
+														<input class="form-control">
+													</div>
+													<div class="form-group">
+														<label>Tenor</label>
+														<input class="form-control">
+													</div>
+													</p>
+												</div>
+												<div class="tab-pane fade" id="cash">
+													<h4>Cash Information</h4>
+													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+												</div>
+											</div>
+											</div>
+											
+										  </div>
+										 <button type="submit" class="btn btn-default">Submit Button</button>
+                                        <button type="reset" class="btn btn-default">Reset Button</button>
+                                    </form>
+								</div>
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="assets/jquery/jquery-1.11.3.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

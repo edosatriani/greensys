@@ -1,0 +1,15 @@
+<div class="panel with-nav-tabs panel-{@themes@}">
+	<div class="panel-heading">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#tab1success" data-toggle="tab">Entry PO</a></li>
+			<li><a href="#tab2success" data-toggle="tab">Outstanding PO</a></li>
+		</ul>
+	</div>
+					
+	<div class="panel-body">
+		<div class="tab-content">
+			<div class="tab-pane fade in active" id="tab1success">{@entry-spk-content@}</div>
+			<div class="tab-pane fade" id="tab2success">{@outstanding-po-content@}</div>
+		</div>
+	</div>
+</div>
