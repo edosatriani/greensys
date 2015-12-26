@@ -11,7 +11,7 @@ error_reporting(0);
 
 $dir = dirname(__FILE__);
 $dir = str_replace("\\", "/", $dir);
-$xmldir = "D:/H1 PSL/virtu/xml/query/";
+$xmldir = "D:/H1 DEMO/virtu/xml/query/";
 
 define("LOCAL_DIR", $dir);
 define("XML_DIR", $xmldir);
