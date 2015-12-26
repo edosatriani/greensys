@@ -4,6 +4,8 @@
 //}
 //error_reporting(0);
 
+//devin test
+
 $dir = dirname(__FILE__);
 $dir = str_replace("\\", "/", $dir);
 $xmldir = "D:/H1 PSL/virtu/xml/query/";
