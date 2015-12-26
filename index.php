@@ -5,6 +5,7 @@
 //error_reporting(0);
 
 //devin test
+//test ke2
 
 $dir = dirname(__FILE__);
 $dir = str_replace("\\", "/", $dir);
